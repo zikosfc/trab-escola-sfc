@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santos FC - O Clube da Vila</title>
+    <style>
+        /* Estilo Minimalista Preto e Branco */
+        :root {
+            --preto: #000000;
+            --branco: #FFFFFF;
+            --cinza-escuro: #222222;
+            --cinza-medio: #555555;
+            --cinza-claro: #EEEEEE;
+            --base-font-size: 18px;
+            
+            /* Cores padrão (modo claro) */
+            --bg-color: var(--branco);
+            --text-color: var(--cinza-escuro);
+            --header-bg: var(--preto);
+            --header-text: var(--branco);
+            --card-bg: var(--branco);
+            --card-border: var(--cinza-claro);
+            --nav-bg: var(--branco);
+            --nav-text: var(--preto);
+            --footer-bg: var(--preto);
+            --footer-text: var(--branco);
+            --border-color: var(--preto);
+        }
+        
+        /* Modo Escuro */
+        [data-theme="dark"] {
+            --bg-color: var(--preto);
+            --text-color: var(--branco);
+            --header-bg: var(--cinza-escuro);
+            --header-text: var(--branco);
+            --card-bg: var(--cinza-escuro);
+            --card-border: var(--cinza-medio);
+            --nav-bg: var(--cinza-escuro);
+            --nav-text: var(--branco);
+            --footer-bg: var(--cinza-escuro);
+            --footer-text: var(--branco);
+            --border-color: var(--branco);
+        }
+        
+        body {
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            font-size: var(--base-font-size);
+            transition: all 0.3s ease;
+        }
+        
+        /* Cabeçalho Minimalista */
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 3rem 1rem;
+            text-align: center;
+            position: relative;
+            border-bottom: 5px solid var(--border-color);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .club-badge {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            filter: grayscale(100%) brightness(200%);
+        }
+        
+        .club-title {
+            font-size: 3.5rem;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .club-motto {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            font-style: italic;
+            color: var(--header-text);
+            opacity: 0.9;
+        }
+        
+        /* Barra de Acessibilidade Minimalista */
+        .accessibility-bar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .accessibility-btn {
+            background: var(--bg-color);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .accessibility-btn:hover {
+            background: var(--border-color);
+            color: var(--bg-color);
+            transform: scale(1.1);
+        }
+        
+        /* Navegação Moderna */
+        nav {
+            background-color: var(--nav-bg);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--nav-text);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--border-color);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link:focus::after {
+            width: 100%;
+        }
+        
+        /* Conteúdo Principal */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+        
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 100px;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--border-color);
+        }
+        
+        /* Grid de Conteúdo */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 2rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: var(--border-color);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        
+        /* Galeria de Imagens */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 1;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s, filter 0.5s;
+            filter: grayscale(30%);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            color: var(--branco);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* Linha do Tempo */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            padding: 1.5rem 2rem;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border: 1px solid var(--card-border);
+            position: relative;
+        }
+        
+        .timeline-year {
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Rodapé Elegante */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 4rem 1rem;
+            text-align: center;
+            border-top: 5px solid var(--border-color);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            width: 80px;
+            margin-bottom: 1.5rem;
+            filter: grayscale(100%) brightness(200%);
+        }
+        
+        .back-to-top {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--footer-text);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .back-to-top:hover {
+            background: var(--border-color);
+            color: var(--footer-bg);
+        }
+        
+        .back-to-top::after {
+            content: '↑';
+            margin-left: 5px;
+        }
+        
+        /* Elementos de Acessibilidade */
+        .skip-link {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            background: var(--preto);
+            color: var(--branco);
+            padding: 1rem;
+            z-index: 1000;
+            font-weight: bold;
+        }
+        
+        .skip-link:focus {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+            width: auto;
+            height: auto;
+            clip: auto;
+        }
+        
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .club-title {
+                font-size: 2.5rem;
+            }
+            
+            .club-motto {
+                font-size: 1.2rem;
+            }
+            
+            .accessibility-bar {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 70px;
+                padding-right: 0;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-content::after,
+            .timeline-item:nth-child(odd) .timeline-content::after {
+                left: -10px;
+                right: auto;
+                border-right: 10px solid white;
+                border-left: none;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Link para pular navegação -->
+    <a href="#conteudo" class="skip-link">Pular para o conteúdo principal</a>
+    
+    <!-- Cabeçalho Minimalista -->
+    <header>
+        <div class="header-content">
+            <img src="./Santos_Logo.png" alt="Escudo do Santos FC" class="club-badge">
+            <h1 class="club-title">Santos Futebol Clube</h1>
+            <p class="club-motto">"Santos sempre Santos"</p>
+        </div>
+    </header>
+    
+    <!-- Barra de Acessibilidade -->
+    <div class="accessibility-bar">
+        <button id="increaseFont" class="accessibility-btn" aria-label="Aumentar tamanho do texto">A+</button>
+        <button id="decreaseFont" class="accessibility-btn" aria-label="Diminuir tamanho do texto">A-</button>
+        <button id="toggleTheme" class="accessibility-btn" aria-label="Alternar modo escuro">🌓</button>
+    </div>
+    
+    <!-- Navegação Moderna -->
+    <nav aria-label="Navegação principal">
+        <div class="nav-container">
+            <a href="#historia" class="nav-link" accesskey="1">História</a>
+            <a href="#titulos" class="nav-link" accesskey="2">Títulos</a>
+            <a href="#idolos" class="nav-link" accesskey="3">Ídolos</a>
+            <a href="#estadio" class="nav-link" accesskey="4">Vila Belmiro</a>
+            <a href="#torcida" class="nav-link" accesskey="5">Torcida</a>
+        </div>
+    </nav>
+    
+    <!-- Conteúdo Principal -->
+    <main id="conteudo">
+        <section id="historia" aria-labelledby="historia-heading">
+            <h2 id="historia-heading">Nossa História</h2>
+            <p>Fundado em 14 de abril de 1912, o Santos Futebol Clube é uma das instituições mais tradicionais e vitoriosas do futebol brasileiro. Conhecido como "Clube da Vila", o Santos se tornou um símbolo do futebol arte.</p>
+            
+            <div class="content-grid">
+                <div class="card">
+                    <h3 class="card-title">A Fundação</h3>
+                    <p>O Santos FC foi fundado por iniciativa de três esportistas santistas que queriam criar um time para representar a cidade. O primeiro jogo oficial aconteceu em 1912, contra o Santos Athletic Club.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">A Era de Ouro</h3>
+                    <p>Os anos 1950-1970 marcaram a era de ouro do clube, com Pelé, Pepe, Coutinho e outros grandes jogadores que levaram o Santos ao topo do futebol mundial.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">O Século XXI</h3>
+                    <p>Com Neymar como principal destaque, o Santos continuou sua tradição de revelar talentos e conquistar títulos importantes, como a Libertadores de 2011.</p>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1912</div>
+                        <p>Fundação do Santos Futebol Clube</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1935</div>
+                        <p>Primeiro título do Campeonato Paulista</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1956</div>
+                        <p>Estreia de Pelé no time profissional</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1962-63</div>
+                        <p>Bicampeonato Mundial de Clubes</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2011</div>
+                        <p>Tricampeão da Libertadores</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="titulos" aria-labelledby="titulos-heading">
+            <h2 id="titulos-heading">Nossas Conquistas</h2>
+            <p>O Santos FC é um dos clubes mais vitoriosos do Brasil, com uma coleção de títulos que inclui conquistas internacionais e nacionais.</p>
+            
+            <div class="content-grid">
+                <div class="card">
+                    <h3 class="card-title">Internacionais</h3>
+                    <ul>
+                        <li>2 Mundiais (1962, 1963)</li>
+                        <li>3 Libertadores (1962, 1963, 2011)</li>
+                        <li>1 Recopa Sul-Americana (2012)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Nacionais</h3>
+                    <ul>
+                        <li>8 Campeonatos Brasileiros</li>
+                        <li>1 Copa do Brasil (2010)</li>
+                        <li>22 Campeonatos Paulistas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="bi.jpg" alt="Santos campeão mundial em 1962">
+                    <div class="gallery-caption">Mundial 1963</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="tri.jpg" alt="Santos campeão da Libertadores 2011">
+                    <div class="gallery-caption">Libertadores 2011</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="octa.jpg" alt="Santos campeão brasileiro">
+                    <div class="gallery-caption">Brasileirão 2004</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="idolos" aria-labelledby="idolos-heading">
+            <h2 id="idolos-heading">Nossos Ídolos</h2>
+            <p>O Santos é celeiro de alguns dos maiores jogadores da história do futebol. Conheça nossas lendas:</p>
+            
+            <div class="content-grid">
+                <div class="card">
+                    <h3 class="card-title">Pelé, o Rei</h3>
+                    <p>O Rei do Futebol jogou no Santos de 1956 a 1974, marcando 1.091 gols e levando o clube ao topo mundial. Bi campeão da Libertadores e Mundial, tornou o Santos fc o clube brasileiro mais conhecido do mundo.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Coutinho, o Gênio da Pequena Área</h3>
+                    <p>Formou com Pelé a dupla de ataque mais famosa da história do clube, participando das grandes conquistas dos anos 60. Coutinho é considerado um dos maiores idolos do clube, marcando 368 gols.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Pepe, o Canhão da Vila</h3>
+                    <p>O "Canhão da Vila" é um dos maiores ídolos da história santista, conhecido por seus chutes potentes. Maior vencedor de Campeonatos Paulistas, com 13 títulos conquistados 11 como jogador do Santos. Com 403 gols marcados em 750 partidas, Pepe é o segundo maior artilheiro da história do Santos.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Neymar, o Príncipe</h3>
+                    <p>Revelado nas categorias de base, foi o grande nome do time que conquistou a Libertadores de 2011. Mesmo durante uma crise gigante no clube, Neymar retorna em 2025, surpreendendo a todos, mostrando seu carinho e amor pelo clube de seu coração. Trouxe o primeiro título da Copa do Brasil em 2010, e o tri campeonato da LIbertadores, 48 anos depois.</p>
+                </div>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="./pele.png" alt="Pelé, o Rei do Futebol">
+                    <div class="gallery-caption">Pelé - O Rei</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./couto.jpg" alt="Coutinho, parceiro de Pelé">
+                    <div class="gallery-caption">Coutinho</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./canhao.jpg" alt="Pepe, o Canhão da Vila">
+                    <div class="gallery-caption">Pepe</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./ney.jpg" alt="Neymar, O Príncipe">
+                    <div class="gallery-caption">Neymar</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="estadio" aria-labelledby="estadio-heading">
+            <h2 id="estadio-heading">Vila Belmiro</h2>
+            <p>O Estádio Urbano Caldeira, mais conhecido como Vila Belmiro, é a casa do Santos FC desde 1916.</p>
+            
+            <div class="content-grid">
+                <div class="card">
+                    <h3 class="card-title">História</h3>
+                    <p>Inaugurado em 1916, recebeu o nome de Urbano Caldeira, um dos fundadores do clube. É um dos estádios mais tradicionais do Brasil.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Características</h3>
+                    <ul>
+                        <li>Capacidade: 16.068 torcedores</li>
+                        <li>Dimensões: 105m x 68m</li>
+                        <li>Localização: Rua Princesa Isabel, s/nº</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="./vila.jpeg" alt="Vista externa da Vila Belmiro">
+                    <div class="gallery-caption">Vista Externa</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./torcida.jpg" alt="Torcida do Santos na Vila Belmiro">
+                    <div class="gallery-caption">Torcida na Vila</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="torcida" aria-labelledby="torcida-heading">
+            <h2 id="torcida-heading">Nossa Torcida</h2>
+            <p>A torcida santista é conhecida por sua paixão e fidelidade. Conheça mais sobre os santistas:</p>
+            
+            <div class="content-grid">
+                <div class="card">
+                    <h3 class="card-title">Torcida Jovem</h3>
+                    <p>Fundada em 12 de outubro de 1969, a Torcida Jovem é a maior e mais tradicional torcida organizada do Santos FC. Reconhecida por sua paixão e organização, ela se tornou um símbolo da identidade santista, acompanhando o time em jogos por todo o Brasil e no exterior.
+
+                        Características e Curiosidades:
+                        Cores e Símbolos: Utiliza as cores preto e branco, mantendo a identidade do clube, e tem como símbolo um escudo com o nome "Jovem" estilizado.
+                        
+                        Cantos e Tradição: Famosa por seus cânticos animados e pela presença vibrante na Vila Belmiro, criando um ambiente eletrizante nos jogos.
+                        
+                        Conquistas e Marcas: Acompanhou o Santos em momentos históricos, como as Libertadores (1962, 1963, 2011) e os Mundiais (1962, 1963).
+                        
+                        Organização e Eventos: Promove caravanas para jogos fora de casa e eventos beneficentes, reforçando seu vínculo com a comunidade santista.</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="jovem.jpg" alt="Torcida Jovem do Santos">
+                    <div class="gallery-caption">Torcida Jovem</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+
+    <script>
+        // Funções para acessibilidade
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configuração do tamanho da fonte
+            const root = document.documentElement;
+            const savedFontSize = localStorage.getItem('fontSize');
+            if (savedFontSize) {
+                root.style.setProperty('--base-font-size', savedFontSize);
+                document.body.style.fontSize = savedFontSize;
+            }
+            
+            // Configuração do tema
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+            }
+            
+            // Event listeners para os botões
+            document.getElementById('increaseFont').addEventListener('click', increaseFont);
+            document.getElementById('decreaseFont').addEventListener('click', decreaseFont);
+            document.getElementById('toggleTheme').addEventListener('click', toggleTheme);
+            
+            // Foco visível para elementos
+            document.addEventListener('keyup', function(e) {
+                if (e.key === 'Tab') {
+                    const focused = document.activeElement;
+                    focused.style.outline = '3px solid var(--border-color)';
+                    focused.style.outlineOffset = '2px';
+                }
+            });
+        });
+        
+        function increaseFont() {
+            const root = document.documentElement;
+            const currentSize = parseFloat(getComputedStyle(document.body).fontSize);
+            const newSize = currentSize + 2;
+            root.style.setProperty('--base-font-size', newSize + 'px');
+            document.body.style.fontSize = newSize + 'px';
+            localStorage.setItem('fontSize', newSize + 'px');
+        }
+        
+        function decreaseFont() {
+            const root = document.documentElement;
+            const currentSize = parseFloat(getComputedStyle(document.body).fontSize);
+            if (currentSize > 12) {
+                const newSize = currentSize - 2;
+                root.style.setProperty('--base-font-size', newSize + 'px');
+                document.body.style.fontSize = newSize + 'px';
+                localStorage.setItem('fontSize', newSize + 'px');
+            }
+        }
+        
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Atualiza o ícone do botão
+            const themeBtn = document.getElementById('toggleTheme');
+            themeBtn.textContent = newTheme === 'dark' ? '☀' : '🌙';
+        }
+        
+        // Adiciona aria-current para a navegação
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.forEach(l => l.removeAttribute('aria-current'));
+                this.setAttribute('aria-current', 'page');
+            });
+        });
+    </script>
+</body>
+</html>
